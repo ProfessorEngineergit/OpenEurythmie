@@ -71,6 +71,21 @@
     </style>
 </head>
 <body>
+    <!-- Shared SVG definitions for arrow markers -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#3498db"/>
+            </marker>
+            <marker id="arrowred" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#e74c3c"/>
+            </marker>
+            <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#2ecc71"/>
+            </marker>
+        </defs>
+    </svg>
+    
     <h1>OpenEurythmie - 13 Bewegungsformen</h1>
     <div class="forms-container">
         <!-- Form 1: Three diagonal lines -->
@@ -88,18 +103,6 @@
                 <!-- Person 3 - Green -->
                 <circle cx="220" cy="80" r="4" fill="#2ecc71"/>
                 <line x1="220" y1="80" x2="200" y2="220" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrowgreen)"/>
-                
-                <defs>
-                    <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
-                        <path d="M0,0 L0,6 L9,3 z" fill="#3498db"/>
-                    </marker>
-                    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
-                        <path d="M0,0 L0,6 L9,3 z" fill="#e74c3c"/>
-                    </marker>
-                    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
-                        <path d="M0,0 L0,6 L9,3 z" fill="#2ecc71"/>
-                    </marker>
-                </defs>
             </svg>
             <div class="legend">
                 <span class="legend-item"><span class="legend-color" style="background:#3498db;"></span>Person 1</span>
@@ -136,15 +139,15 @@
             <div class="form-title">Form 3</div>
             <svg viewBox="0 0 300 300">
                 <!-- Person 1 - Blue -->
-                <circle cx="150" cy="100" r="4" fill="#3498db"/>
-                <ellipse cx="150" cy="150" rx="60" ry="90" stroke="#3498db" stroke-width="3" fill="none" marker-start="url(#arrowblue)"/>
+                <circle cx="150" cy="60" r="4" fill="#3498db"/>
+                <path d="M 150 60 A 60 90 0 1 1 149.9 60" stroke="#3498db" stroke-width="3" fill="none" marker-end="url(#arrowblue)"/>
                 
                 <!-- Person 2 - Red -->
-                <circle cx="170" cy="105" r="4" fill="#e74c3c"/>
+                <circle cx="170" cy="65" r="4" fill="#e74c3c"/>
                 <ellipse cx="150" cy="150" rx="70" ry="95" stroke="#e74c3c" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
                 
                 <!-- Person 3 - Green -->
-                <circle cx="130" cy="105" r="4" fill="#2ecc71"/>
+                <circle cx="130" cy="65" r="4" fill="#2ecc71"/>
                 <ellipse cx="150" cy="150" rx="50" ry="85" stroke="#2ecc71" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
             </svg>
             <div class="legend">
@@ -159,16 +162,16 @@
             <div class="form-title">Form 4</div>
             <svg viewBox="0 0 300 300">
                 <!-- Person 1 - Blue (outer circle) -->
-                <circle cx="150" cy="80" r="4" fill="#3498db"/>
-                <circle cx="150" cy="150" r="80" stroke="#3498db" stroke-width="3" fill="none" marker-start="url(#arrowblue)"/>
+                <circle cx="150" cy="70" r="4" fill="#3498db"/>
+                <path d="M 150 70 A 80 80 0 1 1 149.9 70" stroke="#3498db" stroke-width="3" fill="none" marker-end="url(#arrowblue)"/>
                 
                 <!-- Person 2 - Red (middle path) -->
                 <circle cx="120" cy="120" r="4" fill="#e74c3c"/>
                 <path d="M 120 120 Q 150 110, 180 120 Q 190 150, 180 180 Q 150 190, 120 180 Q 110 150, 120 120" stroke="#e74c3c" stroke-width="3" fill="none" marker-end="url(#arrowred)"/>
                 
                 <!-- Person 3 - Green (inner path) -->
-                <circle cx="150" cy="150" r="4" fill="#2ecc71"/>
-                <circle cx="150" cy="150" r="20" stroke="#2ecc71" stroke-width="3" fill="none" marker-start="url(#arrowgreen)"/>
+                <circle cx="170" cy="150" r="4" fill="#2ecc71"/>
+                <path d="M 170 150 A 20 20 0 1 1 169.9 150" stroke="#2ecc71" stroke-width="3" fill="none" marker-end="url(#arrowgreen)"/>
             </svg>
             <div class="legend">
                 <span class="legend-item"><span class="legend-color" style="background:#3498db;"></span>Person 1</span>
@@ -297,15 +300,15 @@
             <div class="form-title">Form 10</div>
             <svg viewBox="0 0 300 300">
                 <!-- Person 1 - Blue (outer oval) -->
-                <circle cx="150" cy="90" r="4" fill="#3498db"/>
-                <ellipse cx="150" cy="150" rx="80" ry="100" stroke="#3498db" stroke-width="3" fill="none" marker-start="url(#arrowblue)"/>
+                <circle cx="150" cy="50" r="4" fill="#3498db"/>
+                <path d="M 150 50 A 80 100 0 1 1 149.9 50" stroke="#3498db" stroke-width="3" fill="none" marker-end="url(#arrowblue)"/>
                 
                 <!-- Person 2 - Red (middle oval) -->
-                <circle cx="165" cy="95" r="4" fill="#e74c3c"/>
+                <circle cx="165" cy="60" r="4" fill="#e74c3c"/>
                 <ellipse cx="150" cy="150" rx="60" ry="80" stroke="#e74c3c" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
                 
                 <!-- Person 3 - Green (inner oval) -->
-                <circle cx="135" cy="95" r="4" fill="#2ecc71"/>
+                <circle cx="135" cy="65" r="4" fill="#2ecc71"/>
                 <ellipse cx="150" cy="150" rx="40" ry="60" stroke="#2ecc71" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
             </svg>
             <div class="legend">
