@@ -92,8 +92,8 @@
   <div class="grid" id="grid"></div>
 
   <script>
-    var NS = 'http://www.w3.org/2000/svg';
-    var COLORS = ['#E63946', '#457B9D', '#2A9D8F'];
+    var ns = 'http://www.w3.org/2000/svg';
+    var colors = ['#E63946', '#457B9D', '#2A9D8F'];
 
     /* ---------- form definitions ---------- */
     var forms = [
@@ -192,10 +192,10 @@
 
     /* ---------- rendering ---------- */
     function markerDefs(formIdx) {
-      var defs = document.createElementNS(NS, 'defs');
-      COLORS.forEach(function(color, i) {
-        var id = 'a' + formIdx + '_' + i;
-        var marker = document.createElementNS(NS, 'marker');
+      var defs = document.createElementNS(ns, 'defs');
+      colors.forEach(function(color, i) {
+        var id = 'arrow' + formIdx + '_' + i;
+        var marker = document.createElementNS(ns, 'marker');
         marker.setAttribute('id', id);
         marker.setAttribute('viewBox', '0 0 10 7');
         marker.setAttribute('markerWidth', '14');
@@ -203,7 +203,7 @@
         marker.setAttribute('refX', '9');
         marker.setAttribute('refY', '3.5');
         marker.setAttribute('orient', 'auto');
-        var poly = document.createElementNS(NS, 'polygon');
+        var poly = document.createElementNS(ns, 'polygon');
         poly.setAttribute('points', '0 0,10 3.5,0 7');
         poly.setAttribute('fill', color);
         marker.appendChild(poly);
@@ -221,27 +221,27 @@
       h2.textContent = 'Form ' + (fi + 1);
       card.appendChild(h2);
 
-      var svg = document.createElementNS(NS, 'svg');
+      var svg = document.createElementNS(ns, 'svg');
       svg.setAttribute('viewBox', '0 0 300 300');
       svg.appendChild(markerDefs(fi));
 
       form.paths.forEach(function(p, pi) {
-        var path = document.createElementNS(NS, 'path');
+        var path = document.createElementNS(ns, 'path');
         path.setAttribute('d', p.d);
-        path.setAttribute('stroke', COLORS[pi]);
+        path.setAttribute('stroke', colors[pi]);
         path.setAttribute('stroke-width', '2.5');
         path.setAttribute('fill', 'none');
         path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('marker-end', 'url(#a' + fi + '_' + pi + ')');
+        path.setAttribute('marker-end', 'url(#arrow' + fi + '_' + pi + ')');
         svg.appendChild(path);
       });
 
       form.paths.forEach(function(p, pi) {
-        var dot = document.createElementNS(NS, 'circle');
+        var dot = document.createElementNS(ns, 'circle');
         dot.setAttribute('cx', p.s[0]);
         dot.setAttribute('cy', p.s[1]);
         dot.setAttribute('r', '6');
-        dot.setAttribute('fill', COLORS[pi]);
+        dot.setAttribute('fill', colors[pi]);
         svg.appendChild(dot);
       });
 
