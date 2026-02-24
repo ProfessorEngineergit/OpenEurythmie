@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenEurythmie – Formen 1–13</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f5f0eb;
+      color: #333;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      color: #2c3e50;
+      letter-spacing: 0.02em;
+    }
+    .subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .legend-dot {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.2rem 1.2rem 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .card h2 {
+      text-align: center;
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+      color: #34495e;
+      font-weight: 600;
+    }
+    .card svg {
+      display: block;
+      width: 100%;
+      background: #fafafa;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Eurythmie-Formen 1–13</h1>
+  <p class="subtitle">● Startpunkt &nbsp;&bull;&nbsp; ➜ Bewegungsrichtung &nbsp;&bull;&nbsp; Drei Personen pro Form</p>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:#E63946"></span> Person 1</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#457B9D"></span> Person 2</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#2A9D8F"></span> Person 3</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <script>
+    var NS = 'http://www.w3.org/2000/svg';
+    var COLORS = ['#E63946', '#457B9D', '#2A9D8F'];
+
+    /* ---------- form definitions ---------- */
+    var forms = [
+      { /* Form 1 – Three straight lines diverging downward */
+        paths: [
+          { d: 'M 130,50 L 35,255', s: [130,50] },
+          { d: 'M 150,50 L 150,260', s: [150,50] },
+          { d: 'M 170,50 L 265,255', s: [170,50] }
+        ]
+      },
+      { /* Form 2 – Chalice / vase curves */
+        paths: [
+          { d: 'M 110,50 C 15,95 25,210 140,265', s: [110,50] },
+          { d: 'M 150,55 C 172,145 128,205 150,268', s: [150,55] },
+          { d: 'M 190,50 C 285,95 275,210 160,265', s: [190,50] }
+        ]
+      },
+      { /* Form 3 – Circle with three inward loops */
+        paths: [
+          { d: 'M 150,60 A 90,90 0 0,1 228,105 A 13,13 0 1,0 237,120 A 90,90 0 0,1 228,195', s: [150,60] },
+          { d: 'M 228,195 A 90,90 0 0,1 150,240 A 13,13 0 1,0 134,238 A 90,90 0 0,1 72,195', s: [228,195] },
+          { d: 'M 72,195 A 90,90 0 0,1 72,105 A 13,13 0 1,0 82,93 A 90,90 0 0,1 150,60', s: [72,195] }
+        ]
+      },
+      { /* Form 4 – Inverted triangle */
+        paths: [
+          { d: 'M 75,80 L 225,80', s: [75,80] },
+          { d: 'M 225,80 L 150,245', s: [225,80] },
+          { d: 'M 150,245 L 75,80', s: [150,245] }
+        ]
+      },
+      { /* Form 5 – Three straight lines diverging upward */
+        paths: [
+          { d: 'M 130,255 L 35,50', s: [130,255] },
+          { d: 'M 150,260 L 150,45', s: [150,260] },
+          { d: 'M 170,255 L 265,50', s: [170,255] }
+        ]
+      },
+      { /* Form 6 – Three S-shaped sinuous curves */
+        paths: [
+          { d: 'M 65,55 C 130,90 10,175 85,255', s: [65,55] },
+          { d: 'M 150,55 C 220,90 80,175 150,255', s: [150,55] },
+          { d: 'M 235,55 C 170,90 290,175 215,255', s: [235,55] }
+        ]
+      },
+      { /* Form 7 – Three spiral curls */
+        paths: [
+          { d: 'M 25,120 C 25,60 115,60 115,120 C 115,165 42,165 42,120 C 42,85 98,85 98,120 C 98,140 62,140 62,120', s: [25,120] },
+          { d: 'M 100,225 C 100,165 195,165 195,225 C 195,270 118,270 118,225 C 118,190 178,190 178,225 C 178,245 135,245 135,225', s: [100,225] },
+          { d: 'M 185,105 C 185,45 275,45 275,105 C 275,150 202,150 202,105 C 202,70 258,70 258,105 C 258,125 220,125 220,105', s: [185,105] }
+        ]
+      },
+      { /* Form 8 – Flowing teardrop / pear shape */
+        paths: [
+          { d: 'M 150,35 C 85,55 25,135 55,225 C 65,252 95,268 130,268', s: [150,35] },
+          { d: 'M 130,268 C 165,272 205,260 232,225', s: [130,268] },
+          { d: 'M 232,225 C 268,175 248,95 195,58 C 178,46 162,38 150,35', s: [232,225] }
+        ]
+      },
+      { /* Form 9 – Three separate ovals */
+        paths: [
+          { d: 'M 76,80 A 38,58 0 1,1 84,80', s: [76,80] },
+          { d: 'M 216,80 A 38,58 0 1,1 224,80', s: [216,80] },
+          { d: 'M 146,165 A 44,55 0 1,1 154,165', s: [146,165] }
+        ]
+      },
+      { /* Form 10 – Complex spiral / lemniscate */
+        paths: [
+          { d: 'M 155,148 C 165,70 285,70 275,150 C 265,230 160,225 145,155', s: [155,148] },
+          { d: 'M 145,148 C 135,70 15,70 25,150 C 35,230 140,225 155,155', s: [145,148] },
+          { d: 'M 150,130 C 175,100 225,75 255,90 C 290,108 295,170 265,210 C 235,250 175,265 135,248 C 95,230 50,195 40,150 C 30,105 55,60 100,45 C 140,32 185,40 215,58', s: [150,130] }
+        ]
+      },
+      { /* Form 11 – Three flowing S-curves */
+        paths: [
+          { d: 'M 75,50 C 40,100 130,130 95,185 C 60,240 50,260 75,270', s: [75,50] },
+          { d: 'M 150,50 C 115,100 205,130 170,185 C 135,240 125,260 150,270', s: [150,50] },
+          { d: 'M 225,50 C 190,100 280,130 245,185 C 210,240 200,260 225,270', s: [225,50] }
+        ]
+      },
+      { /* Form 12 – Curved triangle with loops at vertices */
+        paths: [
+          { d: 'M 150,55 Q 215,130 235,220 A 12,12 0 1,1 222,232', s: [150,55] },
+          { d: 'M 222,232 Q 150,275 78,220 A 12,12 0 1,1 65,208', s: [222,232] },
+          { d: 'M 65,208 Q 88,120 142,58 A 12,12 0 1,1 158,52', s: [65,208] }
+        ]
+      },
+      { /* Form 13 – Three weaving / intertwined flowing paths */
+        paths: [
+          { d: 'M 45,55 C 100,55 195,135 250,135 C 280,135 275,195 210,240', s: [45,55] },
+          { d: 'M 150,35 C 205,60 255,125 210,185 C 165,245 105,265 75,265', s: [150,35] },
+          { d: 'M 255,55 C 205,80 100,105 75,165 C 50,225 95,272 178,265', s: [255,55] }
+        ]
+      }
+    ];
+
+    /* ---------- rendering ---------- */
+    function markerDefs(formIdx) {
+      var defs = document.createElementNS(NS, 'defs');
+      COLORS.forEach(function(color, i) {
+        var id = 'a' + formIdx + '_' + i;
+        var marker = document.createElementNS(NS, 'marker');
+        marker.setAttribute('id', id);
+        marker.setAttribute('viewBox', '0 0 10 7');
+        marker.setAttribute('markerWidth', '14');
+        marker.setAttribute('markerHeight', '10');
+        marker.setAttribute('refX', '9');
+        marker.setAttribute('refY', '3.5');
+        marker.setAttribute('orient', 'auto');
+        var poly = document.createElementNS(NS, 'polygon');
+        poly.setAttribute('points', '0 0,10 3.5,0 7');
+        poly.setAttribute('fill', color);
+        marker.appendChild(poly);
+        defs.appendChild(marker);
+      });
+      return defs;
+    }
+
+    var grid = document.getElementById('grid');
+
+    forms.forEach(function(form, fi) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      var h2 = document.createElement('h2');
+      h2.textContent = 'Form ' + (fi + 1);
+      card.appendChild(h2);
+
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 300 300');
+      svg.appendChild(markerDefs(fi));
+
+      form.paths.forEach(function(p, pi) {
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', p.d);
+        path.setAttribute('stroke', COLORS[pi]);
+        path.setAttribute('stroke-width', '2.5');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('marker-end', 'url(#a' + fi + '_' + pi + ')');
+        svg.appendChild(path);
+      });
+
+      form.paths.forEach(function(p, pi) {
+        var dot = document.createElementNS(NS, 'circle');
+        dot.setAttribute('cx', p.s[0]);
+        dot.setAttribute('cy', p.s[1]);
+        dot.setAttribute('r', '6');
+        dot.setAttribute('fill', COLORS[pi]);
+        svg.appendChild(dot);
+      });
+
+      card.appendChild(svg);
+      grid.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
